@@ -12,7 +12,7 @@ AzureCreateVM(){
   --storage-sku StandardSSD_LRS \
   --public-ip-sku Standard \
   --generate-ssh-keys \
-  --custom-data /home/jhonny/workspace/github/scripts/Ubuntu_InstallDocker.sh
+  --custom-data /home/jhonny/workspace/github/scripts/Ubuntu_DockerWebGithub.sh
 }
 
 AzureCreateRG
