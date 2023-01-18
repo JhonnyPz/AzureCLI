@@ -4,14 +4,14 @@
     "parameters": {
         "vmName": {
             "type": "string",
-            "defaultValue": "VM_WN11",
+            "defaultValue": "VM-WN11",
             "metadata": {
                 "description": "The name of you Virtual Machine."
             }
         },
         "VmSize": {
             "type": "string",
-            "defaultValue": "Standard_D2_v3",
+            "defaultValue": "Standard_D2s_v3",
             "metadata": {
                 "description": "The size of the VM"
             }
@@ -38,7 +38,7 @@
         },
         "dnsLabelPrefix": {
             "type": "string",
-            "defaultValue": "[toLower(concat('simplewinvs-', uniqueString(resourceGroup().id)))]",
+            "defaultValue": "sao-002",
             "metadata": {
                 "description": "Unique DNS Name for the Public IP used to access the Virtual Machine."
             }
@@ -242,8 +242,8 @@
             "value": "[parameters('networkSecurityGroupName')]"
         },
         "hostname": {
-            "value": "[reference(variables('publicIPAddressName')).dnsSettings.fqdn]",
-            "type": "string"
+            "type": "string",
+            "value": "[reference(variables('publicIPAddressName')).dnsSettings.fqdn]"
         }
     }
 }
