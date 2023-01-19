@@ -105,10 +105,10 @@ try
 
         # CommunityModules
         $CommunityModulesArgsList = @(
-            "--add Microsoft.VisualStudio.Workload.Data",
-            "--add Microsoft.VisualStudio.Workload.ManagedDesktop",
-            "--add Microsoft.VisualStudio.Workload.NativeDesktop",
-            "--add Microsoft.VisualStudio.Workload.NetWeb",
+            #"--add Microsoft.VisualStudio.Workload.Data",
+            #"--add Microsoft.VisualStudio.Workload.ManagedDesktop",
+            #"--add Microsoft.VisualStudio.Workload.NativeDesktop",
+            #"--add Microsoft.VisualStudio.Workload.NetWeb",
             "--add Microsoft.VisualStudio.Workload.Azure"
         )
 

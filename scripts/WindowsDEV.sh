@@ -7,17 +7,19 @@ AzureCreateRG(){
 AzureCreateVM(){
     az vm create \
   --resource-group MyVMTest \
-  --name UbuntuJP \
-  --image canonical:0001-com-ubuntu-server-jammy:22_04-lts-gen2:latest \
+  --name VS2022 \
+  --image MicrosoftWindowsDesktop:windows-11:win11-22h2-ent:latest \
   --storage-sku StandardSSD_LRS \
+  --size Standard_D4s_v3 \
+  --admin-username azure \
+  --admin-password Qwe123qwe123 \
   --public-ip-sku Standard \
-  --generate-ssh-keys \
-  --custom-data /home/jhonny/workspace/github/scripts/scriptsInstallApps/Ubuntu_DockerWebGithub.sh
+  --custom-data /home/jhonny/workspace/github/scripts/scriptsInstallApps/visualstudio2022.ps1
 }
 
 AzureCreateRG
 AzureCreateVM
 
-az vm open-port --resource-group MyVMTest --name UbuntuJP --port 80 --priority 1001
+az vm open-port --resource-group MyVMTest --name VS2022 --port 3389 --priority 1001
 
 az vm list-ip-addresses --resource-group MyVMTest -o table
