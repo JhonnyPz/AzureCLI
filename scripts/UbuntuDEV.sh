@@ -19,6 +19,7 @@ AzureCreateVM(){
 }
 
 AzureConfigVM(){
+  echo "Open-ports"
   az vm open-port -g $grname --name $vmname --port 80 --priority 1001 -o table
 }
 

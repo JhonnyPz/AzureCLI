@@ -20,8 +20,10 @@ AzureCreateVM(){
 }
 
 AzureConfigVM(){
-  az vm run-command invoke -g $grname -n $vmname --command-id RunPowerShellScript --scripts /home/jhonny/workspace/github/scripts/scriptsInstallApps/visualstudio2022.ps1
+  echo "Install Visual Studio"
+  az vm run-command invoke -g $grname -n $vmname --command-id RunPowerShellScript --scripts /home/jhonny/workspace/github/scripts/scriptsInstallApps/visualstudio2022.ps1 -o table
 
+  echo "Open-ports"
   az vm open-port -g $grname --name $vmname --port 3389 --priority 1001 -o table
 }
 
