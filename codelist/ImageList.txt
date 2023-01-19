@@ -1,0 +1,25 @@
+az vm image list --offer Windows11 --all --output table 
+
+WINDOWS
+
+MicrosoftWindowsDesktop:windows-11:win11-22h2-ent:latest
+MicrosoftWindowsDesktop:Windows-10:win10-22h2-pro-g2:latest
+MicrosoftVisualStudio:visualstudioplustools:vs-2022-pro-general-win10-m365-gen2:latest
+
+LINUX
+canonical:0001-com-ubuntu-server-jammy:22_04-lts-gen2:latest
+Canonical:UbuntuServer:19_10-daily-gen2:19.10.202007100
+
+
+
+az vm image list-publisher --location westus3 --output table 
+{
+MicrosoftWindowsDesktop
+MicrosoftVisualStudio
+}
+
+az vm image list-offers --location westus3 --publisher MicrosoftVisualStudio --output table
+az vm image list-skus --location westus3 --publisher MicrosoftVisualStudio --offer visualstudioplustools --output table
+az vm image list --location westus3 --publisher MicrosoftVisualStudio --offer visualstudioplustools --sku vs-2022-pro-general-win11-m365-gen2 --all --output table
+
+az vm image show --location westus3 --urn MicrosoftVisualStudio:visualstudio2019latest:vs-2019-comm-latest-win10-n:latest

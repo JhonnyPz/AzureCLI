@@ -1,0 +1,59 @@
+AzureCreateGR(){
+    az group create \
+    --name MyVMTest \
+    --location westus3
+}
+
+AzureCreateVM(Linux){
+    az vm create \
+  --resource-group MyVMTest \
+  --name CentOS \
+  --image canonical:0001-com-ubuntu-server-jammy:22_04-lts-gen2:latest \
+  --storage-sku StandardSSD_LRS \
+  --custom-data simple_bash.sh \
+  --admin-username azure \
+  --generate-ssh-keys 
+  --public-ip-sku Standard
+}
+
+AzureCreateVM(Windows){
+    az vm create \
+  --resource-group MyVMTest \
+  --name Windows \
+  --image MicrosoftWindowsDesktop:Windows-10:win10-22h2-pro-g2:latest \
+  --storage-sku StandardSSD_LRS \
+  --size Standard_D4s_v3 \
+  --admin-username azure \
+  --admin-password Qwe123asd123 \
+  --public-ip-sku Standard
+}
+
+
+AzureCreateGallery(){
+az group create --name myGalleryRG --location southcentralus
+az sig create --resource-group myGalleryRG --gallery-name myGallery --location southcentralus
+
+az vm list -g MyVMTest --output table
+az vm get-instance-view -g MyVMTest -n UbuntuDocker --query id
+
+az sig image-definition create \
+   --resource-group myGalleryRG \
+   --gallery-name myGallery \
+   --gallery-image-definition UbuntuDev_Docker \
+   --publisher JPerez \
+   --offer UbuntuDev \
+   --sku 22.04TLS-V001 \
+   --os-type Linux \
+   --os-state specialized \
+   --hyper-v-generation V2 \
+   --location southcentralus
+   
+az sig image-version create \
+   --resource-group myGalleryRG \
+   --gallery-name myGallery \
+   --gallery-image-definition UbuntuDev_Docker \
+   --gallery-image-version 0.0.2 \
+   --target-regions "westus3" "southcentralus=1" "eastus=1=standard_zrs" \
+   --replica-count 2 \
+   --managed-image "/subscriptions/22a90c09-d8ab-4226-b9d9-52dc9f43b1a8/resourceGroups/MyVMTest/providers/Microsoft.Compute/virtualMachines/UbuntuDocker"
+}
