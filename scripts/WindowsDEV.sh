@@ -1,25 +1,32 @@
 #!/bin/bash
+grname="MyVMTest"
+vmname="VS2022"
+
 AzureCreateRG(){
     az group create \
-  --name MyVMTest
+  --name $grname
 }
 
 AzureCreateVM(){
     az vm create \
-  --resource-group MyVMTest \
-  --name VS2022 \
+  --resource-group $grname \
+  --name $vmname \
   --image MicrosoftWindowsDesktop:windows-11:win11-22h2-ent:latest \
   --storage-sku StandardSSD_LRS \
   --size Standard_D4s_v3 \
   --admin-username azure \
   --admin-password Qwe123qwe123 \
-  --public-ip-sku Standard \
-  --custom-data /home/jhonny/workspace/github/scripts/scriptsInstallApps/visualstudio2022.ps1
+  --public-ip-sku Standard
+}
+
+AzureConfigVM(){
+  az vm run-command invoke -g $grname -n $vmname --command-id RunPowerShellScript --scripts /home/jhonny/workspace/github/scripts/scriptsInstallApps/visualstudio2022.ps1
+
+  az vm open-port -g $grname --name $vmname --port 3389 --priority 1001 -o table
 }
 
 AzureCreateRG
 AzureCreateVM
+AzureConfigVM
 
-az vm open-port --resource-group MyVMTest --name VS2022 --port 3389 --priority 1001 -o table
-
-az vm list-ip-addresses --resource-group MyVMTest -o table
+az vm list-ip-addresses -g $grname -o table
