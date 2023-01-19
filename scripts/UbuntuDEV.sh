@@ -18,6 +18,6 @@ AzureCreateVM(){
 AzureCreateRG
 AzureCreateVM
 
-az vm open-port --resource-group MyVMTest --name UbuntuJP --port 80 --priority 1001
+az vm open-port --resource-group MyVMTest --name UbuntuJP --port 80 --priority 1001 -o table
 
 az vm list-ip-addresses --resource-group MyVMTest -o table

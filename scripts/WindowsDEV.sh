@@ -20,6 +20,6 @@ AzureCreateVM(){
 AzureCreateRG
 AzureCreateVM
 
-az vm open-port --resource-group MyVMTest --name VS2022 --port 3389 --priority 1001
+az vm open-port --resource-group MyVMTest --name VS2022 --port 3389 --priority 1001 -o table
 
 az vm list-ip-addresses --resource-group MyVMTest -o table
