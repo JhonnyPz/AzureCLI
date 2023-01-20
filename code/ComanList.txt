@@ -1,21 +1,23 @@
 Hello
 
 (defaults){
-az configure --defaults group=MyGrTest
-az config set defaults.group=MyGrTest defaults.location=westus3
+az configure --defaults group=MyVMTest
+az config set defaults.group=MyVMTest defaults.location=westus3
 }
 
 (VM){
 az vm image list --offer Windows11 --all --output table 
 az vm list-sizes --location eastus --output table
+
+az vm run-command invoke ---resource-group name --name name --command-id RunPowerShellScript --scripts @path/name.ps1
 }
 
 (NETWORK){
-az vm list-ip-addresses --resource-group MyVMTest -o table
+az vm list-ip-addresses --resource-group name -o table
 }
 
 (NSG){
-az vm open-port --resource-group MyVMTest --name Ubuntu_18-04 --port 80 --priority 1001
+az vm open-port --resource-group name --name name --port 80 --priority 1001
 }
 
 (Other){
