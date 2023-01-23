@@ -109,7 +109,7 @@ try
             #"--add Microsoft.VisualStudio.Workload.NativeDesktop",
             #"--add Microsoft.VisualStudio.Workload.NetWeb",
             #"--add Microsoft.VisualStudio.Workload.Azure",
-            #"--add Microsoft.VisualStudio.Workload.ManagedDesktop"
+            "--add Microsoft.VisualStudio.Workload.ManagedDesktop"
         )
 
         if ($sku -eq 'Community')
