@@ -1,8 +1,8 @@
 Hello
 
 (defaults){
-az configure --defaults group=MyVMTest
-az config set defaults.group=MyVMTest defaults.location=westus3
+az configure --defaults group=GRTest
+az config set defaults.group=GRTest defaults.location=westus3
 }
 
 (VM){
